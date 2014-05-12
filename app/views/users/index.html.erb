@@ -1,0 +1,19 @@
+<h2>welcome to the prose-verse</h2>
+<% if @user.valid? %>
+  <p>hello, <%= @user.username %></p>
+  <a href=''><button>my dashboard</button></a>
+  <a href='/log_out'><button>log out</button></a>
+<% else %>
+  <h5>log in below</h5>
+  <%= form_for @user, url: user_path(@user), method: :get do |f| %>
+    <p>Username <%= f.text_field :username %></p>
+    <p>Password<%= f.text_field :password %></p>
+    <%= f.submit %>
+  <% end %>
+  <h5>or create an account</h5>
+  <%= form_for @user, url: { action: "create", controller: "user" } do |f| %>
+    <p>Username <%= f.text_field :username %></p>
+    <p>Password <%= f.text_field :password %></p>
+    <p>Confirm Password <%= f.text_field :password_confirmation %></p>
+  <% end %>
+<% end %>
